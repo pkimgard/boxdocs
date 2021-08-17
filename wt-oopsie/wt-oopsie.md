@@ -81,7 +81,7 @@ We now have 5 valid ids. Starting to browse them from the top, the user id is na
 
 ![super-admin](assets/markdown-img-paste-20210814152552751.png)
 
-I activated the proxy and started mitmproxy(preinstalled in kali) and set it to intercept requests.
+I activated the proxy and started mitmproxy(preinstalled in kali) and set it to intercept requests. See the [mitmproxy docs](https://docs.mitmproxy.org/stable/) for intercepting and modifying requests.
 
 ![change-cookie](assets/markdown-img-paste-20210814152820129.png)
 
@@ -109,16 +109,14 @@ Since it's a linux machine, elevate to a proper shell with: `SHELL=/bin/bash scr
 
 The user flag is readable from the www-data user, we also find a new username, 'robert'.
 
-## Privilige escalation, robert
+## Privilige escalation
 The www-data user usually only have permissions in the `/var/www/` folders. You can use `grep -r` to search through text files for strings. Useful strings is normally password, pass, Password etc. I tried 'robert' and this came up, another password in cleartext.
 
 ![robert-pass](assets/markdown-img-paste-20210814155201190.png)
 
 ![su-robert](assets/markdown-img-paste-20210814155359887.png)
 
-We're now in as the user robert.
-## Privilege escalation, root
-robert has a group membership that stands out: bugtracker.
+We're now in as the user robert. robert has a group membership that stands out: bugtracker.
 
 ![robert-id](assets/markdown-img-paste-20210814155956813.png)
 
