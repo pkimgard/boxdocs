@@ -1,6 +1,5 @@
-```
-```
-*2021-01-01*
+
+*2021-08-21*
 
 *kimm3*
 
@@ -9,7 +8,7 @@ Platform: HackTheBox, Starting Point
 
 Difficulty: Very Easy
 
-This is the fourth box in the starting point series.
+This is the fifth box in the starting point series.
 
 The boxes build on each other so make sure to save credentials and other intersting information that you find.
 
