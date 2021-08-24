@@ -48,9 +48,9 @@ The ftp service accepts anonymous logins, use the username anonymous and any pas
 
 **Score: 30 points**
 
-![index-p80](assets/markdown-img-paste-20210824034401199.png)
+![index-p80](assets/markdown-img-paste-20210824083235912.png)
 
-Nothing at port 80 index.
+Nothing at index port 80.
 
 ![flag-9090](assets/markdown-img-paste-20210824034427873.png)
 
@@ -129,7 +129,7 @@ We've tried the password winter with users 'RickSanchez' and 'Morty' earlier, bu
 
 ![summer-success](assets/markdown-img-paste-20210824060838986.png)
 
-With ftp, we get, the same file we can get with SSH:
+It works on both ftp and SSH. With both services, we can get to the same flag.
 
 ![ftp-flag](assets/markdown-img-paste-20210824060925820.png)
 
@@ -153,6 +153,8 @@ nc -w 3 192.168.10.1 1234 < Morty/Safe_Password.jpg
 
 ![Safe_password](assets/markdown-img-paste-20210824075323512.png)
 
+There's a password inside the image, view it with at tool in the terminal, I used `strings`.
+
 ![journaltxt](assets/markdown-img-paste-20210824075445869.png)
 
 A flag and a password.
@@ -167,7 +169,7 @@ Running with password from journal.txt.
 
 **Score: 100 points**
 
-The band name is 'Flesh Curtains'.
+The band name is 'Flesh Curtains'. Let's generate som passwords.
 
 ![band-name](assets/markdown-img-paste-20210824080145220.png)
 
