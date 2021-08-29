@@ -3,7 +3,7 @@
 
 *kimm3*
 
-# Walkthrough: Box
+# Walkthrough: Pathfinder
 Platform: HackTheBox, Starting Point
 
 Difficulty: Very Easy
